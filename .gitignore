@@ -1,0 +1,9 @@
+# Environment file — never commit real credentials
+.env
+
+# Dependencies
+vendor/
+
+# OS files
+.DS_Store
+Thumbs.db

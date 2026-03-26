@@ -1,0 +1,8 @@
+{
+    "name": "law-library/api",
+    "description": "Law Library PHP REST API",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    }
+}
