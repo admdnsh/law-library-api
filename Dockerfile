@@ -1,16 +1,13 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
 # Install PDO and MySQL extensions
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
-# Enable Apache mod_rewrite for .htaccess
-RUN a2enmod rewrite
+# Copy all PHP files
+COPY . /app/
 
-# Copy all PHP files to Apache web root
-COPY . /var/www/html/
+WORKDIR /app
 
-# Set correct permissions
-RUN chown -R www-data:www-data /var/www/html
+EXPOSE 8080
 
-# Expose port 80
-EXPOSE 80
+CMD php -S 0.0.0.0:${PORT:-8080}
