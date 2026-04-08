@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-$username = isset($_POST['username']) ? $_POST['username'] : '';
+$username = isset($_POST['username']) ? trim($_POST['username']) : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 
 if (empty($username) || empty($password)) {
@@ -34,13 +34,25 @@ try {
     if ($stmt->rowCount() > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user['Password'] === $password) {
+        // Support bcrypt hashes and plain-text (legacy)
+        $passwordValid = false;
+        if (isset($user['Password'])) {
+            if (strlen($user['Password']) >= 60 && $user['Password'][0] === '$') {
+                $passwordValid = password_verify($password, $user['Password']);
+            } else {
+                $passwordValid = ($user['Password'] === $password);
+            }
+        }
+
+        if ($passwordValid) {
+            $role = isset($user['Role']) ? $user['Role'] : (isset($user['role']) ? $user['role'] : 'officer');
             echo json_encode([
                 'success' => true,
                 'message' => 'Login successful',
                 'user'    => [
                     'Username' => $user['Username'],
-                    'isAdmin'  => 1
+                    'role'     => $role,
+                    'isAdmin'  => ($role === 'admin') ? 1 : 0,
                 ]
             ]);
         } else {
