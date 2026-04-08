@@ -32,11 +32,9 @@ if (strlen($newPassword) < 6) {
     exit();
 }
 
-$hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-
 try {
     $stmt = $conn->prepare("UPDATE users SET Password = :password WHERE Username = :username");
-    $stmt->bindParam(':password', $hashedPassword);
+    $stmt->bindParam(':password', $newPassword);
     $stmt->bindParam(':username', $username);
     $stmt->execute();
 

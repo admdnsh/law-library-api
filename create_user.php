@@ -33,12 +33,10 @@ if (!in_array($role, ['admin', 'officer'])) {
     exit();
 }
 
-$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
 try {
     $stmt = $conn->prepare("INSERT INTO users (Username, Password, Role) VALUES (:username, :password, :role)");
     $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $hashedPassword);
+    $stmt->bindParam(':password', $password);
     $stmt->bindParam(':role',     $role);
     $stmt->execute();
 
