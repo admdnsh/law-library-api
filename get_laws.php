@@ -31,7 +31,7 @@ try {
         $params[':category'] = $category;
     }
 
-    $query .= " ORDER BY Chapter LIMIT :limit OFFSET :offset";
+    $query .= " ORDER BY CAST(REGEXP_SUBSTR(Chapter, '[0-9]+') AS UNSIGNED), Chapter LIMIT :limit OFFSET :offset";
     $params[':limit']  = $limit;
     $params[':offset'] = $offset;
 
