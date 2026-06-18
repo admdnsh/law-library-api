@@ -28,6 +28,7 @@ if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
 $chapter          = isset($data['Chapter'])              ? $data['Chapter']              : '';
 $category         = isset($data['Category'])             ? $data['Category']             : '';
 $title            = isset($data['Title'])                ? $data['Title']                : '';
+$titleMs          = isset($data['Title_MS'])              ? $data['Title_MS']              : '';
 $description      = isset($data['Description'])          ? $data['Description']          : '';
 $descriptionMs    = isset($data['Description_MS'])        ? $data['Description_MS']        : '';
 $compoundFine     = isset($data['Compound_Fine'])        ? $data['Compound_Fine']        : '';
@@ -54,12 +55,13 @@ try {
     }
 
     $stmt = $conn->prepare("INSERT INTO rta_cha_68
-        (Chapter, Category, Title, Description, Description_MS, Compound_Fine, Second_Compound_Fine, Third_Compound_Fine, Fourth_Compound_Fine, Fifth_Compound_Fine)
-        VALUES (:chapter, :category, :title, :description, :description_ms, :compound_fine, :second_fine, :third_fine, :fourth_fine, :fifth_fine)");
+        (Chapter, Category, Title, Title_MS, Description, Description_MS, Compound_Fine, Second_Compound_Fine, Third_Compound_Fine, Fourth_Compound_Fine, Fifth_Compound_Fine)
+        VALUES (:chapter, :category, :title, :title_ms, :description, :description_ms, :compound_fine, :second_fine, :third_fine, :fourth_fine, :fifth_fine)");
 
     $stmt->bindParam(':chapter',        $chapter);
     $stmt->bindParam(':category',       $category);
     $stmt->bindParam(':title',          $title);
+    $stmt->bindParam(':title_ms',       $titleMs);
     $stmt->bindParam(':description',    $description);
     $stmt->bindParam(':description_ms', $descriptionMs);
     $stmt->bindParam(':compound_fine',  $compoundFine);

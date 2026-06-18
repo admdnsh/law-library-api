@@ -23,6 +23,7 @@ $chapter         = isset($data['Chapter'])              ? $data['Chapter']      
 $originalChapter = isset($data['Original_Chapter'])     ? $data['Original_Chapter']     : $chapter;
 $category        = isset($data['Category'])             ? $data['Category']             : '';
 $title           = isset($data['Title'])                ? $data['Title']                : '';
+$titleMs         = isset($data['Title_MS'])              ? $data['Title_MS']              : '';
 $description     = isset($data['Description'])          ? $data['Description']          : '';
 $descriptionMs   = isset($data['Description_MS'])        ? $data['Description_MS']        : '';
 $compoundFine    = isset($data['Compound_Fine'])        ? $data['Compound_Fine']        : '';
@@ -64,6 +65,7 @@ try {
         Chapter = :chapter,
         Category = :category,
         Title = :title,
+        Title_MS = :title_ms,
         Description = :description,
         Description_MS = :description_ms,
         Compound_Fine = :compound_fine,
@@ -77,6 +79,7 @@ try {
     $stmt->bindParam(':chapter',         $chapter);
     $stmt->bindParam(':category',        $category);
     $stmt->bindParam(':title',           $title);
+    $stmt->bindParam(':title_ms',        $titleMs);
     $stmt->bindParam(':description',     $description);
     $stmt->bindParam(':description_ms',  $descriptionMs);
     $stmt->bindParam(':compound_fine',   $compoundFine);
