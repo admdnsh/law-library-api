@@ -29,6 +29,7 @@ $chapter          = isset($data['Chapter'])              ? $data['Chapter']     
 $category         = isset($data['Category'])             ? $data['Category']             : '';
 $title            = isset($data['Title'])                ? $data['Title']                : '';
 $description      = isset($data['Description'])          ? $data['Description']          : '';
+$descriptionMs    = isset($data['Description_MS'])        ? $data['Description_MS']        : '';
 $compoundFine     = isset($data['Compound_Fine'])        ? $data['Compound_Fine']        : '';
 $secondFine       = isset($data['Second_Compound_Fine']) ? $data['Second_Compound_Fine'] : '';
 $thirdFine        = isset($data['Third_Compound_Fine'])  ? $data['Third_Compound_Fine']  : '';
@@ -53,18 +54,19 @@ try {
     }
 
     $stmt = $conn->prepare("INSERT INTO rta_cha_68
-        (Chapter, Category, Title, Description, Compound_Fine, Second_Compound_Fine, Third_Compound_Fine, Fourth_Compound_Fine, Fifth_Compound_Fine)
-        VALUES (:chapter, :category, :title, :description, :compound_fine, :second_fine, :third_fine, :fourth_fine, :fifth_fine)");
+        (Chapter, Category, Title, Description, Description_MS, Compound_Fine, Second_Compound_Fine, Third_Compound_Fine, Fourth_Compound_Fine, Fifth_Compound_Fine)
+        VALUES (:chapter, :category, :title, :description, :description_ms, :compound_fine, :second_fine, :third_fine, :fourth_fine, :fifth_fine)");
 
-    $stmt->bindParam(':chapter',      $chapter);
-    $stmt->bindParam(':category',     $category);
-    $stmt->bindParam(':title',        $title);
-    $stmt->bindParam(':description',  $description);
-    $stmt->bindParam(':compound_fine',$compoundFine);
-    $stmt->bindParam(':second_fine',  $secondFine);
-    $stmt->bindParam(':third_fine',   $thirdFine);
-    $stmt->bindParam(':fourth_fine',  $fourthFine);
-    $stmt->bindParam(':fifth_fine',   $fifthFine);
+    $stmt->bindParam(':chapter',        $chapter);
+    $stmt->bindParam(':category',       $category);
+    $stmt->bindParam(':title',          $title);
+    $stmt->bindParam(':description',    $description);
+    $stmt->bindParam(':description_ms', $descriptionMs);
+    $stmt->bindParam(':compound_fine',  $compoundFine);
+    $stmt->bindParam(':second_fine',    $secondFine);
+    $stmt->bindParam(':third_fine',     $thirdFine);
+    $stmt->bindParam(':fourth_fine',    $fourthFine);
+    $stmt->bindParam(':fifth_fine',     $fifthFine);
     $stmt->execute();
 
     echo json_encode(['success' => true, 'message' => 'Law created successfully']);

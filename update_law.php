@@ -24,6 +24,7 @@ $originalChapter = isset($data['Original_Chapter'])     ? $data['Original_Chapte
 $category        = isset($data['Category'])             ? $data['Category']             : '';
 $title           = isset($data['Title'])                ? $data['Title']                : '';
 $description     = isset($data['Description'])          ? $data['Description']          : '';
+$descriptionMs   = isset($data['Description_MS'])        ? $data['Description_MS']        : '';
 $compoundFine    = isset($data['Compound_Fine'])        ? $data['Compound_Fine']        : '';
 $secondFine      = isset($data['Second_Compound_Fine']) ? $data['Second_Compound_Fine'] : '';
 $thirdFine       = isset($data['Third_Compound_Fine'])  ? $data['Third_Compound_Fine']  : '';
@@ -64,6 +65,7 @@ try {
         Category = :category,
         Title = :title,
         Description = :description,
+        Description_MS = :description_ms,
         Compound_Fine = :compound_fine,
         Second_Compound_Fine = :second_fine,
         Third_Compound_Fine = :third_fine,
@@ -76,6 +78,7 @@ try {
     $stmt->bindParam(':category',        $category);
     $stmt->bindParam(':title',           $title);
     $stmt->bindParam(':description',     $description);
+    $stmt->bindParam(':description_ms',  $descriptionMs);
     $stmt->bindParam(':compound_fine',   $compoundFine);
     $stmt->bindParam(':second_fine',     $secondFine);
     $stmt->bindParam(':third_fine',      $thirdFine);
